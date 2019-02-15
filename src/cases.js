@@ -1,6 +1,6 @@
 var cases = {};
 var newItemId = 9999;
-var hashUrl = "http://softwarecartoon.com:9291/api/request/hashes";
+var hashUrl = "https://test-api.jsql.it/api/request/hashes";
 var nodeUrl = "http://localhost:4000/";
 var memberKey = "Z6kEovODxAv2I5hKekMyUw==";
 var apiKey =
