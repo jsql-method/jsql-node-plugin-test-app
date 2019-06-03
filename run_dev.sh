@@ -1,2 +1,2 @@
 npm install
-grunt dev
+grunt
