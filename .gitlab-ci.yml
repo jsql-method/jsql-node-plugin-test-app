@@ -5,20 +5,8 @@ cache:
 
 
 stages:
-  - build
   - "create image"
   - "deploy service"
-
-
-.common_build_template: &common_build_ref
-  image: node:11
-  before_script:
-    - npm install -g grunt
-    - npm install
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 day
 
 
 .deploy_image_branch_template: &deploy_image_branch_ref
@@ -30,6 +18,7 @@ stages:
      - export CI_PROJECT_PATH_LOWERCASE=`echo $CI_PROJECT_PATH | tr '[:upper:]' '[:lower:]'`
    script:
      - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#uproszczenie
 #     - docker build -f Dockerfile.gitlab-ci -t $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG} .
      - docker build -f Dockerfile -t $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG} .
      - docker push $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG}
@@ -53,15 +42,6 @@ stages:
     - docker -H ${ENVIRONMENT_HOST} service scale $SERVICE_NAME=1
 
 
-build:
-  <<: *common_build_ref
-  stage: build
-  script:
-    - grunt buildDist
-  only:
-    refs:
-      - tags
-      - test
 
 create image:
   <<: *deploy_image_branch_ref
