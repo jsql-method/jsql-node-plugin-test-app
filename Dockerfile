@@ -4,6 +4,4 @@ WORKDIR /build
 
 ADD . /build
 RUN npm install
-RUN grunt
-FROM nginx:stable-alpine
-COPY --from=builder /build/dist/ /usr/share/nginx/html
+CMD node src/app.js
