@@ -5,7 +5,7 @@ cache:
 
 
 stages:
-  - build
+#  - build
   - "create image"
   - "deploy service"
 
@@ -30,6 +30,7 @@ stages:
      - export CI_PROJECT_PATH_LOWERCASE=`echo $CI_PROJECT_PATH | tr '[:upper:]' '[:lower:]'`
    script:
      - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#uproszczenie
 #     - docker build -f Dockerfile.gitlab-ci -t $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG} .
      - docker build -f Dockerfile -t $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG} .
      - docker push $CI_REGISTRY/$CI_PROJECT_PATH_LOWERCASE:${DOCKER_IMAGE_TAG}
