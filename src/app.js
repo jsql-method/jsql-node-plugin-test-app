@@ -9,11 +9,11 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-const jsqlConfig = new JsqlConfig(
-    "dawid.senko@jsql.it",
-    "dawid.senko@jsql.it",
-    10000, 15000,
-    "https://test-provider.jsql.it/api/jsql");
+const jsqlConfig = new JsqlConfig({
+    apiKey: "dawid.senko@jsql.it",
+    devKey: "production-dawid.senko@jsql.it",
+    providerUrl: "https://test-provider.jsql.it"
+});
 
 app.post('/api/jsql/select', (req, res) => {
     Jsql.select(req, res, jsqlConfig);
